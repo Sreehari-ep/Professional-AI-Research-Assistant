@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+    --bg: #05060b;
+    --surface: rgba(255,255,255,.055);
+    --surface-strong: rgba(255,255,255,.09);
+    --stroke: rgba(255,255,255,.12);
+    --text: #f7f8ff;
+    --muted: #a7afc4;
+    --violet: #8b5cf6;
+    --blue: #3b82f6;
+    --cyan: #22d3ee;
+    --success: #34d399;
+    --warning: #fbbf24;
+    --danger: #fb7185;
+    --shadow: 0 22px 70px rgba(0,0,0,.34);
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes paperFloat {
+    0%,100% { transform: translate3d(0,0,0) rotate(-3deg); }
+    50% { transform: translate3d(20px,-24px,0) rotate(2deg); }
+}
+
+@keyframes reveal {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 rgba(139,92,246,0); }
+    50% { box-shadow: 0 0 38px rgba(139,92,246,.18); }
+}
+
+html, body, [class*="css"] {
+    font-family: "Inter", sans-serif;
+}
+
+.stApp {
+    background:
+        radial-gradient(circle at 8% 8%, rgba(139,92,246,.22), transparent 28%),
+        radial-gradient(circle at 92% 16%, rgba(34,211,238,.15), transparent 25%),
+        radial-gradient(circle at 52% 96%, rgba(59,130,246,.12), transparent 30%),
+        linear-gradient(135deg, #04050a, #0b1020 48%, #070812);
+    background-size: 180% 180%;
+    animation: gradientShift 18s ease infinite;
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+.stApp::before,
+.stApp::after {
+    content: "";
+    position: fixed;
+    z-index: 0;
+    pointer-events: none;
+    width: 320px;
+    height: 430px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.10);
+    background:
+        repeating-linear-gradient(0deg, transparent 0 23px, rgba(255,255,255,.04) 24px),
+        linear-gradient(150deg, rgba(255,255,255,.075), rgba(255,255,255,.018));
+    backdrop-filter: blur(16px);
+    box-shadow: var(--shadow);
+}
+
+.stApp::before {
+    left: -112px;
+    top: 110px;
+    animation: paperFloat 12s ease-in-out infinite;
+}
+
+.stApp::after {
+    right: -120px;
+    bottom: 30px;
+    animation: paperFloat 14s ease-in-out infinite reverse;
+}
+
+.block-container {
+    max-width: 1500px;
+    padding-top: 1.35rem;
+    padding-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, rgba(8,9,16,.97), rgba(16,19,33,.94));
+    border-right: 1px solid rgba(255,255,255,.08);
+    backdrop-filter: blur(22px);
+}
+
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {
+    color: var(--muted);
+}
+
+.hero-shell {
+    position: relative;
+    overflow: hidden;
+    padding: 42px;
+    margin-bottom: 24px;
+    border-radius: 28px;
+    border: 1px solid var(--stroke);
+    background: linear-gradient(135deg, rgba(255,255,255,.105), rgba(255,255,255,.025));
+    backdrop-filter: blur(24px);
+    box-shadow: var(--shadow);
+    animation: reveal .72s ease-out, pulse 5s ease-in-out infinite;
+}
+
+.hero-shell::after {
+    content: "ABSTRACT  METHODS  RESULTS  REFERENCES";
+    position: absolute;
+    right: -40px;
+    bottom: 8px;
+    color: rgba(255,255,255,.026);
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 8px;
+    white-space: nowrap;
+}
+
+.hero-eyebrow {
+    color: #c4b5fd;
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .18em;
+    margin-bottom: 12px;
+}
+
+.hero-shell h1 {
+    margin: 0;
+    max-width: 880px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(2.35rem, 4vw, 4.5rem);
+    line-height: 1.04;
+    background: linear-gradient(90deg, #ffffff, #c4b5fd 45%, #67e8f9);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero-shell p {
+    max-width: 850px;
+    color: #c5cbe0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.hero-badges {
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.hero-badges span,
+.status-pill {
+    border: 1px solid rgba(255,255,255,.11);
+    background: rgba(255,255,255,.055);
+    padding: 7px 11px;
+    border-radius: 999px;
+    color: #dbeafe;
+    font-size: .78rem;
+    font-weight: 650;
+    backdrop-filter: blur(12px);
+}
+
+.section-heading {
+    margin: 8px 0 16px;
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+}
+
+.section-heading p {
+    color: var(--muted);
+    margin-top: 7px;
+}
+
+.glass-card,
+.result-panel {
+    height: 100%;
+    border: 1px solid var(--stroke);
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 20px;
+    backdrop-filter: blur(19px);
+    box-shadow: 0 15px 45px rgba(0,0,0,.20);
+    animation: reveal .5s ease-out;
+    transition: transform .24s ease, border-color .24s ease, background .24s ease;
+}
+
+.glass-card:hover,
+.result-panel:hover {
+    transform: translateY(-5px);
+    border-color: rgba(139,92,246,.56);
+    background: var(--surface-strong);
+}
+
+.card-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: linear-gradient(135deg, rgba(139,92,246,.35), rgba(34,211,238,.22));
+    border: 1px solid rgba(255,255,255,.12);
+    margin-bottom: 13px;
+}
+
+.glass-card h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+}
+
+.glass-card p,
+.result-caption {
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+.result-label {
+    color: #c4b5fd;
+    font-size: .74rem;
+    letter-spacing: .13em;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.result-content {
+    color: var(--text);
+    line-height: 1.72;
+}
+
+.result-caption {
+    margin-top: 12px;
+    font-size: .82rem;
+}
+
+div[data-testid="stMetric"] {
+    border: 1px solid var(--stroke);
+    border-radius: 20px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+    backdrop-filter: blur(18px);
+    box-shadow: 0 16px 42px rgba(0,0,0,.20);
+    transition: transform .24s ease, border-color .24s ease;
+}
+
+div[data-testid="stMetric"]:hover {
+    transform: translateY(-5px);
+    border-color: rgba(34,211,238,.45);
+}
+
+.stButton > button,
+.stDownloadButton > button {
+    border-radius: 14px;
+    min-height: 44px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: linear-gradient(135deg, #7c3aed, #2563eb);
+    color: #fff;
+    font-weight: 760;
+    box-shadow: 0 12px 28px rgba(124,58,237,.25);
+    transition: transform .22s ease, box-shadow .22s ease;
+}
+
+.stButton > button:hover,
+.stDownloadButton > button:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 18px 38px rgba(124,58,237,.36);
+}
+
+[data-testid="stFileUploader"] {
+    border: 1px dashed rgba(139,92,246,.52);
+    border-radius: 20px;
+    background: rgba(255,255,255,.035);
+    padding: 12px;
+}
+
+[data-testid="stChatMessage"] {
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 18px;
+    background: rgba(255,255,255,.045);
+    backdrop-filter: blur(15px);
+    margin-bottom: 10px;
+}
+
+div[data-baseweb="input"] > div,
+div[data-baseweb="select"] > div,
+textarea {
+    border-radius: 13px !important;
+    background: rgba(255,255,255,.05) !important;
+    border-color: rgba(255,255,255,.11) !important;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-pill span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 12px rgba(52,211,153,.8);
+}
+
+hr {
+    border-color: rgba(255,255,255,.08);
+}
+
+@media (max-width: 900px) {
+    .hero-shell {
+        padding: 28px;
+    }
+
+    .hero-shell::after {
+        display: none;
+    }
+}
